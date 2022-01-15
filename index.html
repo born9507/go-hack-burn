@@ -1,0 +1,87 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>캐치마인드</h1>
+
+  <a href="/painter">그림 그리기</a>
+  <a href="/answerer">맞추기</a>
+
+  <!-- <canvas id="jsCanvas"></canvas>
+
+  <input id="input-box" type="text">
+  <button onclick="sendMessage()">전송</button>
+  <ul id='message-list'></ul> -->
+
+
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script>
+    console.log('start')
+    var socket = io();
+
+    const sendMessage = (_) => {
+      const content = document.getElementById('input-box').value
+      socket.emit('catchmind/send-message', {'content': content })
+    }
+
+    socket.on('catchmind/send-message', (data) => {
+      console.log('catchmind/send-message');
+      const content = data['content'];
+
+      let li = document.createElement('li')
+      li.innerHTML = data['content']
+      document.getElementById('message-list').appendChild(li)
+    })
+
+    // canvas
+    const canvas = document.getElementById("jsCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = 500;
+    canvas.height = 500;
+
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2.5;
+
+    let painting = false;
+
+    if (canvas) {
+      socket.on('catchmind/not-painting', (data) => {
+        ctx.beginPath();
+        ctx.moveTo(data['x'], data['y']);
+      })
+      socket.on('catchmind/painting', (data) => {
+        ctx.lineTo(data['x'], data['y']);
+        ctx.stroke();
+      })
+
+      canvas.addEventListener("mousemove", (event) => {
+        const x = event.offsetX;
+        const y = event.offsetY;
+
+        if(!painting) {
+          ctx.beginPath();
+          ctx.moveTo(x, y);
+          socket.emit('catchmind/not-painting', {x: event.offsetX, y: event.offsetY});
+        }
+        else {
+          ctx.lineTo(x, y);
+          ctx.stroke();
+          socket.emit('catchmind/painting', {x: event.offsetX, y: event.offsetY});
+        }
+      });
+      canvas.addEventListener("mousedown", () => {
+        painting=true;
+      });
+      canvas.addEventListener("mouseup", () => {
+        painting=false;
+      });
+      canvas.addEventListener("mouseleave", () => {
+        painting=false;
+      });
+    }
+  </script>
+</body>
