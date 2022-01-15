@@ -1,26 +1,76 @@
 const express = require('express');
 const { PrismaClient } = require("@prisma/client")
+const http = require('http');
+const { Server } = require("socket.io");
+const session = require('express-session')
 
 const app = express();
-
 const prisma = new PrismaClient()
-const http = require('http');
 const server = http.createServer(app);
-const { Server } = require("socket.io");
 const io = new Server(server);
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
+app.use(session({
+  secret: 'hahahoho',
+  resave: false,
+  saveUninitialized: true,
+}));
+app.use(express.json())
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
+
+app.get('/', async (req, res) => {
+  console.log(req.sessionID);
+
+  const user = await prisma.user.findUnique({
+    where: {sessionID: req.sessionID},
+  })
+
+  if (user) {
+    res.render('index')
+  } else {
+    res.render('signup')
+  }
+});
+
+app.get('/logout', async (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('connect.sid');
+    res.redirect('/');
+  });
+})
+
+// app.get('/signup', async (req, res) => {
+//   const user = await prisma.user.upsert({
+//     where: { sessionID: req.sessionID },
+//     create: { sessionID: req.sessionID, name: req.body['name'], univ: req.body['univ'] },
+//     update: { sessionID: req.sessionID, name: req.body['name'], univ: req.body['univ'] },
+//   })
+//   res.redirect('/');
+// })
+
+app.post('/api/signup', async (req, res) => {
+  const user = await prisma.user.upsert({
+    where: { sessionID: req.sessionID },
+    create: { sessionID: req.sessionID, name: req.body['name'], univ: req.body['univ'] },
+    update: { sessionID: req.sessionID, name: req.body['name'], univ: req.body['univ'] },
+  })
+  res.json({ sessionID: user.sessionID, name: user.name, univ: user.univ});
+})
+
+app.get('/catchmind', async (req, res) => {
+  // console.log(await prisma.user.findMany())
+  res.render('painter')
 });
 
 app.get('/painter', (req, res) => {
-  res.sendFile(__dirname + '/painter.html');
+  res.render('painter');
 });
 
 app.get('/answerer', (req, res) => {
-  res.sendFile(__dirname + '/answerer.html');
+  res.render('answerer');
 });
-
 
 io.on('connection', (socket) => {
   console.log('a user connected');
