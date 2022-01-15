@@ -16,20 +16,6 @@
     <button onclick="enter()">입장</button>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-      const enter = async () => {
-        await axios.post('/api/signup', {
-          'name': document.getElementById('name').value,
-          'univ': document.getElementById('univ').value
-        })
-        .then(function (response) {
-          console.log(response.data);
-          window.location.href='/';
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      }
-    </script>
+    <script src="login.js"></script>
   </body>
 </html>

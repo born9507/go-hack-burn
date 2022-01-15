@@ -15,6 +15,8 @@ app.use(session({
   saveUninitialized: true,
 }));
 app.use(express.json())
+app.use(express.static('public'));
+// app.use('/static', express.static(__dirname + '/public'));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
@@ -30,7 +32,7 @@ app.get('/', async (req, res) => {
   if (user) {
     res.render('index')
   } else {
-    res.render('signup')
+    res.render('login')
   }
 });
 
@@ -41,16 +43,7 @@ app.get('/logout', async (req, res) => {
   });
 })
 
-// app.get('/signup', async (req, res) => {
-//   const user = await prisma.user.upsert({
-//     where: { sessionID: req.sessionID },
-//     create: { sessionID: req.sessionID, name: req.body['name'], univ: req.body['univ'] },
-//     update: { sessionID: req.sessionID, name: req.body['name'], univ: req.body['univ'] },
-//   })
-//   res.redirect('/');
-// })
-
-app.post('/api/signup', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   const user = await prisma.user.upsert({
     where: { sessionID: req.sessionID },
     create: { sessionID: req.sessionID, name: req.body['name'], univ: req.body['univ'] },
@@ -60,8 +53,27 @@ app.post('/api/signup', async (req, res) => {
 })
 
 app.get('/catchmind', async (req, res) => {
-  // console.log(await prisma.user.findMany())
-  res.render('painter')
+  const user = await prisma.user.findUnique({
+    where: {sessionID: req.sessionID},
+  })
+
+  let catchmindRoom = await prisma.catchmindRoom.findUnique({where: {id: 1}})
+  if (!catchmindRoom) {
+    if (user) {
+      catchmindRoom = await prisma.catchmindRoom.create({data: {painterId: user.id}})
+    }
+  }
+
+  if (catchmindRoom.painterId == user.id) {
+    // 내가 painter 인 경우
+    res.render('painter')
+  } else {
+    res.render('answerer')
+  }
+});
+
+app.get('/dodging-obstacle', (req, res) => {
+  res.render('dodging-obstacle');
 });
 
 app.get('/painter', (req, res) => {
