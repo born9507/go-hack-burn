@@ -26,6 +26,9 @@ body {
     margin-top: 20px;
 }
 
+#nes-badge{
+  margin-left: -20%;
+}
 #nes-ash {
     top: 12%;
 }
