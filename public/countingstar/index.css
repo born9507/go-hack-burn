@@ -8,11 +8,136 @@ body {
     width: 100%;
     height: 100%;
 }
+.wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 60px;
+}
+.info-container {
+    position: relative;
+    width: 80%;
+    height: 100px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#nes-ash {
+    top: 12%;
+}
+
+#game-title {
+    font-size: 1.4rem;
+    width: 40%;
+    height: 100px;
+    display: inline-block;
+    background-image: linear-gradient(to right, #00f260, #f79d00, #0575e6, #64f38c);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-size: 300%;
+    background-position: -200%;
+
+    animation: animatedText 2s infinite alternate-reverse;
+}
+
+@keyframes animatedText {
+    from {
+        background-position: 0%;
+    }
+    to {
+        background-position: 100%;
+    }
+}
+
+#board-title {
+    font-size: 0.7rem;
+    margin-bottom: 8px;
+}
+
+#score-board {
+    font-size: 0.8rem;
+    border: 8px double white;
+    width: 20vw;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    margin-left: 40px;
+    text-align: left;
+}
+
+#Seoul-uni {
+    color: blue;
+}
+
+#Korea-uni {
+    color: red;
+}
+
 .canvas1 {
-    border: 1px solid black;
     width: 950px;
     height: 450px;
+    box-shadow: 0 0 10px 2px rgba(100, 100, 100);
+    background-image: url('../back.jpeg');
 }
-#score {
-    font-size: 50px;
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 950px;
+    height: 450px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0px;
+    margin-top: 50px;
+}
+
+.expression {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 120px;
+    font-size: 12px;
+    background-color: skyblue;
+    position: absolute;
+    left: 1%;
+    bottom: 1%;
+}
+
+.ranking {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+    height: 80px;
+    background-color: red;
+    position: relative;
+    left: 20%;
+}
+
+.navigation__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 70px;
+    background: #298eb5;
+    border: 1px solid #0f465e;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: PFStardust;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+    margin: 3px 0px;
+    color: white;
 }

@@ -1,16 +1,3 @@
-<!-- <html>
-  <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>
-  <a href="/catchmind">캐치마인드</a>
-  <a href="/logout">로그아웃</a>
-  <script>
-  </script>
-  </body>
-</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,30 +5,25 @@
   <title>main</title>
   <link rel="stylesheet" href="index.css">
   <script src="index.js"></script>
-  <script>
-  function Home() {
-    document.getElementById("contentFrame").setAttribute("src", 'home.html')
-  }
-  function Game1() {
-    document.getElementById("contentFrame").setAttribute("src", 'game1.html')
-  }
-  function Game2() {
-    document.getElementById("contentFrame").setAttribute("src", 'musicbox.html')
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
 
-  }
-</script>
+    <!-- font-neodgm-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/style.css">
 </head>
 
 <body onload="draw();">
   <div class="wrapper">
-    <a href="game1.html">index2.html로 이동</a>
-    <div class="header">
-      <div class="title">
-        <p>스펙쌓기</p>
+    <div class="info-container">
+      <i class="nes-ash" id="nes-ash"></i>
+      <div class="nes-container is-rounded" id="game-title">
+        GO-HAK ! GO-HAK !<br>
+        <i class="snes-jp-logo"></i>
       </div>
-      <div class="ranking">
-        <div>순위(단위: 스펙)</div>
-        <div id="rank">asdf</div>
+      <div class="nes-container with-title is-dark" id="score-board">
+        <div class="title" id="board-title">SCORE BOARD</div>
+        <div id="Seoul-uni">SNU : </div>
+        <div id="Korea-uni">KU : </div>
       </div>
     </div>
     <div class="game__box">
@@ -49,33 +31,6 @@
         <canvas class="canvas1" id="canvas1">
         </canvas>
       </div>
-      <!-- <iframe class="canvas" id="contentFrame" src="./home.html"></iframe> -->
-    </div>
-    <div class="expression">
-      <a href="/catchmind">캐치마인드</a>
-      <a href="/dodging-obstacle">장애물 피하기</a>
-      <a href="/dodging-professor">교수님 피하기</a>
-      <a href="/countingstar">별모으기</a>
-      <a href="/logout">로그아웃</a>
-      <!-- <div>기쁨 😀</div>
-      <div>슬픔 😭</div>
-      <div>분노 😡</div>
-      <div>행복 😊</div>
-      <div>귀찮 😒</div> -->
-    </div>
-    <div class="navigation">
-      <!-- <div class="navigation__item" id="home" onclick="Home()">
-        캐치마인드
-      </div>
-      <div class="navigation__item" id="game1" onclick="Game1()">
-        교수님 피하기
-      </div>
-      <div class="navigation__item" id="menuMusicbox" onclick="menuMusic()">
-        장애물 피하기
-      </div>
-      <div class="navigation__item" id="menuMusicbox" onclick="menuMusic()">
-        OX 게임
-      </div> -->
     </div>
   </div>
 
