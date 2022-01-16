@@ -91,6 +91,10 @@ app.get('/chat', (req, res) => {
     res.render('chat/index');
 });
 
+app.get('/ox-quiz', (req, res) => {
+  res.render('ox-quiz/ox-quiz');
+});
+
 app.get('/dodging-professor', (req, res) => {
     res.render('dodging-professor/index');
 })
