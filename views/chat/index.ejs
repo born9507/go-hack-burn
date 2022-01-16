@@ -5,21 +5,37 @@
   <link rel="stylesheet" href="/chat/chat-index.css">
 
   <!-- retro nes.css framework -->
-  <!-- <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"> -->
-  <!-- <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" /> -->
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
   
   <!-- font-neodgm-->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/style.css">
 </head>
 
 <body>
-  <div class="chat-box nes-container is-rounded is-drak">
-  <ul id='message-list'></ul>
+  <div class="nes-container with-title is-centered chat-tool">
+    <p class="title">Chatting</p>
+    <div class="chat-tool">
+      <div class="chat-box nes-container is-rounded is-drak">
+        <ul id='message-list'></ul>
+      </div>
+      <div class="input-box">
+        <input style="font-family: 'NeoDunggeunmo'" id="input-box" placeholder="입력해주세요!" type="text" onkeydown="press()">
+      </div>
+    </div>
   </div>
-
-  <div class="input-box">
-    <input id="input-box" type="text" onkeydown="press()">
-  </div>
+  <section class="message-left">
+    <div class="nes-balloon from-left">
+      <p style="font-family: 'NeoDunggeunmo'">지금내기분은마치새내기!</p>
+    </div>
+    <div class="icons-left">
+      <i class="nes-ash"></i>
+    </div>
+    <div class="icons-right">
+      <a href="https://github.com/born9507/go-hack-burn"><i class="nes-octocat animate"></i></a>
+    </div>
+  </section>
+  
 
 
   <script src="/socket.io/socket.io.js"></script>
@@ -43,7 +59,7 @@
         sendMessage()
       }
     }
-
+    
     socket.on('chat/send-message', (data) => {
       console.log('chat/send-message');
       const name = data['name'];
@@ -54,6 +70,8 @@
       li.className += 'nes-container is-rounded'
       li.id="each-chat"
       document.getElementById('message-list').appendChild(li)
+
+      window.scrollTo(0, document.body.scrollHeight)
     })
   </script>
 </body>
