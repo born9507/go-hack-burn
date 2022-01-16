@@ -160,7 +160,6 @@ function draw() {
         }
 
 
-
     }
     move()
 
