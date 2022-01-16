@@ -2,20 +2,48 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>catchmind</title>
+  <link rel="stylesheet" href="painter.css">
+  <!-- for nes.css framework -->
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+
+  <!-- for Korean retro font -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/style.css">
+  
 </head>
 <body>
-  <h1>캐치마인드 - 그림 그리기</h1>
-  <h2>키워드</h2>
-  <div id='solution'></div>
 
-  <h2>남은 시간</h2>
-  <div id='time'></div>
+  <div class="wrapper">
+    <div class="info-container">
+      <a href="/" class="nes-badge" id="nes-badge">
+        <span class="is-warning">BACK</span>
+      </a>    
+      <i class="nes-ash" id="nes-ash"></i>
+      <div class="nes-container is-rounded" id="game-title">
+        CatchMind !<br>
+        <i class="snes-jp-logo"></i>
+      </div>
+      <div class="nes-container with-title is-dark" id="score-board">
+        <div class="title" id="board-title">SCORE BOARD</div>
+        <div id="Seoul-uni">SNU : </div>
+        <div id="Korea-uni">KU : </div>
+      </div>
+    </div>
 
-  <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
-  <button onclick="eraseAll()">모두 지우기</button>
-
-  <div>채팅</div>
-  <ul id='message-list'></ul>
+    <div class="game__box">        
+      <h2>키워드</h2>
+      <div id='solution'></div>
+      <div class="left-time">남은시간: </div>
+      <div id='time'></div>  
+        <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
+        <button class="nes-btn is-warning" onclick="eraseAll()">모두 지우기</button>
+        <!-- <button onclick="sendMessage()">전송</button> -->
+        <div>채팅</div>
+        <ul id='message-list'></ul>    
+      </div>
+    </div>
+  </div>
 
 
   <script src="/socket.io/socket.io.js"></script>
