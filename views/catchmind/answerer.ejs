@@ -33,9 +33,12 @@
     </div>
 
     <div class="game__box">
-      <div class="left-time">남은시간: </div>
-      <div id='time'></div>
+      <div style="display: flex; flex-direction: column;">
+        <div class="left-time">남은시간: </div>
+        <div id='time'></div>
         <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
+      </div>
+      <div style="display: flex; flex-direction: column;">
         <input id="input-box" type="text" onkeydown="press()">
         <!-- <button onclick="sendMessage()">전송</button> -->
         <ul id='message-list'></ul>

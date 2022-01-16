@@ -32,12 +32,15 @@
     </div>
 
     <div class="game__box">
-      <h2>키워드</h2>
-      <div id='solution'></div>
-      <div class="left-time">남은시간: </div>
-      <div id='time'></div>
+      <div style="display: flex; flex-direction: column;">
+        <h2>키워드</h2>
+        <div id='solution'></div>
+        <div class="left-time">남은시간: </div>
+        <div id='time'></div>
         <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
         <button class="nes-btn is-warning" onclick="eraseAll()">모두 지우기</button>
+      </div>
+      <div style="display: flex; flex-direction: column;">
         <!-- <button onclick="sendMessage()">전송</button> -->
         <div>채팅</div>
         <ul id='message-list'></ul>
