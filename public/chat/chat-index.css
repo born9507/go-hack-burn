@@ -19,6 +19,7 @@ body {
   justify-content: space-around;
   align-items: center;
   height: 41em;
+  margin-bottom: 15px;
 }
 
 .chat-box{
