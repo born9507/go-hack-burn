@@ -5,29 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDODGING-PROFESSOR</title>
-
     <link rel="stylesheet" href="/dodging-professor/gameBase.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9" defer></script>
-
-    <script src="/socket.io/socket.io.js" defer></script>
-    <script src="/dodging-professor/keyHandler.js" defer></script>
-    <script src="https://kit.fontawesome.com/d5ec65f1e9.js" crossorigin="anonymous"></script>
-    <script src="/dodging-professor/gamePage.js" defer></script>
-    <script src="/dodging-professor/gameObject" defer></script>
-    <script src="/dodging-professor/modal.js" defer></script>
-    <link rel="stylesheet" href="/dodging-professor/modal.css">
 
    <!-- retro nes.css framework -->
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+
+    <!-- font-neodgm-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/style.css">
+
 
 </head>
 <body>
     <div class="info-container">
       <i class="nes-ash" id="nes-ash"></i>
       <div class="nes-container is-rounded" id="game-title">
-        DODGING-PROFESSOR!<br>
+        DODGING-PROFESSOR
         <i class="snes-jp-logo"></i>
       </div>
       <div class="nes-container with-title is-dark" id="score-board">
@@ -38,13 +31,12 @@
     </div>
 
 
+    <!-- 캔버스 크기는 상황에 맞게 -->
     <div class="game_container">
         <canvas
             id = "myCanvas"
-            width ='1024'
-            height = '768'> 
-            <!-- width = ' 700'
-              height = ' 400' > -->
+            width = ' 700'
+            height = '400' >
         </canvas>
 
         <div style="text-align: center;" >
@@ -56,15 +48,5 @@
             </button>
         </div>
     </div>
-
-    <audio
-        controls id="bgm"
-        hidden='true'>
-
-        <source
-            src="/dodging-professor/sounds/InvisibleSizeDown.mp3"
-            type="audio/mp3">
-    </audio>
-
 </body>
 </html>

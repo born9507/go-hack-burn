@@ -116,12 +116,12 @@ function getPlayerColor(){
   return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
-const canvasWidth = 700;
-const canvasHeight = 400;
-const randomY = 400; //랜덤 생성 위치 범위 조정
-const randomX = 700; //
-// const canvasWidth = 1024;
-// const canvasHeight = 768;
+const randomY = 768; //랜덤 생성 위치 범위 조정
+const randomX = 1024; //
+const canvasWidth = 1024;
+const canvasHeight = 768;
+// const canvasWidth = 700;
+// const canvasHeight = 400;
 let enemyFrequency = 1000;
 const startX = canvasWidth/2;
 const startY = canvasHeight/2;
