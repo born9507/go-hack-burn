@@ -60,7 +60,7 @@ app.get('/catchmind', async (req, res) => {
 
   const catchmindRoom = await prisma.catchmindRoom.findUnique({where:{id:1}})
   if (!catchmindRoom) {
-    await prisma.catchmindRoom.create();
+    await prisma.catchmindRoom.create({data: {}});
   }
 
   if (intervalId == null || timeoutId == null) {
