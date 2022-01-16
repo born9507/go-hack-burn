@@ -1,0 +1,52 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/dodging-professor/gameBase.css">
+
+   <!-- retro nes.css framework -->
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+
+    <!-- font-neodgm-->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/style.css">
+
+
+</head>
+<body>
+    <div class="info-container">
+      <i class="nes-ash" id="nes-ash"></i>
+      <div class="nes-container is-rounded" id="game-title">
+        DODGING-PROFESSOR
+        <i class="snes-jp-logo"></i>
+      </div>
+      <div class="nes-container with-title is-dark" id="score-board">
+        <div class="title" id="board-title">SCORE BOARD</div>
+        <div id="Seoul-uni">SNU : </div>
+        <div id="Korea-uni">KU : </div>
+      </div>
+    </div>
+
+
+    <!-- 캔버스 크기는 상황에 맞게 -->
+    <div class="game_container">
+        <canvas
+            id = "myCanvas"
+            width = ' 700'
+            height = '400' >
+        </canvas>
+
+        <div style="text-align: center;" >
+            <button
+                class="nes-btn is-warning"
+                type="button"
+                id="start_btn" onclick="start()">
+                Start
+            </button>
+        </div>
+    </div>
+</body>
+</html>

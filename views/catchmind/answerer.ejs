@@ -1,0 +1,77 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>캐치마인드 - 정답 맞추기</h1>
+
+  <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
+
+  <input id="input-box" type="text" onkeydown="press()">
+  <!-- <button onclick="sendMessage()">전송</button> -->
+  <ul id='message-list'></ul>
+
+
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script>
+    console.log('start')
+    var socket = io();
+
+    const sendMessage = () => {
+      const content = document.getElementById('input-box').value
+      socket.emit('catchmind/send-message', {'content': content })
+      document.getElementById('input-box').value = ''
+    }
+
+    const press = () => {
+      if (window.event.keyCode == 13) {
+        // 엔터키가 눌렸을 때
+        console.log('enter')
+        sendMessage()
+      }
+    }
+
+    socket.on('catchmind/erase-all', () => {
+      const canvas = document.getElementById("jsCanvas");
+      if (canvas) {
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath()
+      }
+    })
+
+    socket.on('catchmind/send-message', (data) => {
+      console.log('catchmind/send-message');
+      const content = data['content'];
+
+      let li = document.createElement('li')
+      li.innerHTML = data['content']
+      document.getElementById('message-list').appendChild(li)
+    })
+
+    // canvas
+    const canvas = document.getElementById("jsCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = 500;
+    canvas.height = 500;
+
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2.5;
+
+    let painting = false;
+
+    if (canvas) {
+      socket.on('catchmind/not-painting', (data) => {
+        ctx.beginPath();
+        ctx.moveTo(data['x'], data['y']);
+      })
+      socket.on('catchmind/painting', (data) => {
+        ctx.lineTo(data['x'], data['y']);
+        ctx.stroke();
+      })
+    }
+  </script>
+</body>
