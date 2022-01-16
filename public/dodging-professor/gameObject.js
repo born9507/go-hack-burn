@@ -1,60 +1,60 @@
 
-        class PlayerBall{
-            constructor(id,color,x,y){
-                this.id = id;
-                this.x = x;
-                this.y = y;
-                this.color = color;
-                this.state = 1;
-                this.radius = 16;
-                this.playerSpeed = 4;
-            }
-            getId(){
-                return this.id;
-            }
-            setId(id){
-                this.id = id;
-            }
-            getX(){
-                return this.x;
-            }
-            setX(x){
-                this.x = x;
-            }
-            getY(){
-                return this.y;
-            }
-            setY(y){
-                this.y = y;
-            }
-            getColor(){
-                return this.color;
-            }
-            setColor(color){
-                this.color = color;
-            }
-            getState(){
-                return this.state;
-            }
-            setState(state){
-                this.state = state;
-            }
-            getRadius(){
-                return this.radius;
-            }
-            setRadius(radius){
-                this.radius = radius;
-            }
-            getPlayerSpeed(){
-                return this.playerSpeed;
-            }
-            setPlayerSpeed(playerSpeed){
-                this.playerSpeed = playerSpeed;
-            }
-        }
+class PlayerBall {
+    constructor(id, color, x, y) {
+        this.id = id;
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.state = 1;
+        this.radius = 16;
+        this.playerSpeed = 4;
+    }
+    getId() {
+        return this.id;
+    }
+    setId(id) {
+        this.id = id;
+    }
+    getX() {
+        return this.x;
+    }
+    setX(x) {
+        this.x = x;
+    }
+    getY() {
+        return this.y;
+    }
+    setY(y) {
+        this.y = y;
+    }
+    getColor() {
+        return this.color;
+    }
+    setColor(color) {
+        this.color = color;
+    }
+    getState() {
+        return this.state;
+    }
+    setState(state) {
+        this.state = state;
+    }
+    getRadius() {
+        return this.radius;
+    }
+    setRadius(radius) {
+        this.radius = radius;
+    }
+    getPlayerSpeed() {
+        return this.playerSpeed;
+    }
+    setPlayerSpeed(playerSpeed) {
+        this.playerSpeed = playerSpeed;
+    }
+}
 
-class EnemyBall{
-    constructor(x,y,destinationX,destinationY, wall){
+class EnemyBall {
+    constructor(x, y, destinationX, destinationY, wall) {
 
         this.color = "#000000";
         this.x = x;
@@ -69,84 +69,84 @@ class EnemyBall{
         this.speedX = 0;
         this.speedY = 0;
     }
-    getSpeedX(){
+    getSpeedX() {
         return this.speedX;
     }
-    setSpeedX(speedX){
+    setSpeedX(speedX) {
         this.speedX = speedX;
     }
 
-    getSpeedY(){
+    getSpeedY() {
         return this.speedY;
     }
-    setSpeedY(speedY){
+    setSpeedY(speedY) {
         this.speedY = speedY;
     }
 
-    getColor(){
+    getColor() {
         return this.color;
     }
-    setColor(color){
+    setColor(color) {
         this.color = color;
     }
-    getX(){
+    getX() {
         return this.x;
     }
-    setX(x){
+    setX(x) {
         this.x = x;
     }
-    getY(){
+    getY() {
         return this.y;
     }
-    setY(y){
+    setY(y) {
         this.y = y;
     }
-    getDestinationX(){
+    getDestinationX() {
         return this.destinationX;
     }
-    setDestinationX(destinationX){
+    setDestinationX(destinationX) {
         this.destinationX = destinationX;
     }
-    getDestinationY(){
+    getDestinationY() {
         return this.destinationY;
     }
-    setDestinationY(destinationY){
+    setDestinationY(destinationY) {
         this.destinationY = destinationY;
     }
-    getInitialX(){
+    getInitialX() {
         return this.initialX;
     }
-    setInitialX(initialX){
+    setInitialX(initialX) {
         this.initialX = initialX;
     }
-    getInitialY(){
+    getInitialY() {
         return this.initialY;
     }
-    setInitialY(initialY){
+    setInitialY(initialY) {
         this.initialY = initialY;
     }
-    getWall(){
+    getWall() {
         return this.wall;
     }
-    setWall(wall){
+    setWall(wall) {
         this.wall = wall;
     }
-    getRadius(){
+    getRadius() {
         return this.radius;
     }
-    setRadius(radius){
+    setRadius(radius) {
         this.radius = radius;
     }
-    getAliveTime(){
+    getAliveTime() {
         return this.aliveTime;
     }
-    setAliveTime(aliveTime){
+    setAliveTime(aliveTime) {
         this.aliveTime = aliveTime;
     }
 }
 
-class straightEnemyBall{
-    constructor(x,y,destinationX,destinationY, wall){
+class straightEnemyBall {
+    constructor(x, y, destinationX, destinationY, wall) {
 
         this.color = "#000000";
         this.x = x;
@@ -159,70 +159,70 @@ class straightEnemyBall{
         this.radius = 10;
         this.aliveTime = 300;
     }
-    getColor(){
+    getColor() {
         return this.color;
     }
-    setColor(color){
+    setColor(color) {
         this.color = color;
     }
-    getX(){
+    getX() {
         return this.x;
     }
-    setX(x){
+    setX(x) {
         this.x = x;
     }
-    getY(){
+    getY() {
         return this.y;
     }
-    setY(y){
+    setY(y) {
         this.y = y;
     }
-    getDestinationX(){
+    getDestinationX() {
         return this.destinationX;
     }
-    setDestinationX(destinationX){
+    setDestinationX(destinationX) {
         this.destinationX = destinationX;
     }
-    getDestinationY(){
+    getDestinationY() {
         return this.destinationY;
     }
-    setDestinationY(destinationY){
+    setDestinationY(destinationY) {
         this.destinationY = destinationY;
     }
-    getInitialX(){
+    getInitialX() {
         return this.initialX;
     }
-    setInitialX(initialX){
+    setInitialX(initialX) {
         this.initialX = initialX;
     }
-    getInitialY(){
+    getInitialY() {
         return this.initialY;
     }
-    setInitialY(initialY){
+    setInitialY(initialY) {
         this.initialY = initialY;
     }
-    getWall(){
+    getWall() {
         return this.wall;
     }
-    setWall(wall){
+    setWall(wall) {
         this.wall = wall;
     }
-    getRadius(){
+    getRadius() {
         return this.radius;
     }
-    setRadius(radius){
+    setRadius(radius) {
         this.radius = radius;
     }
-    getAliveTime(){
+    getAliveTime() {
         return this.aliveTime;
     }
-    setAliveTime(aliveTime){
+    setAliveTime(aliveTime) {
         this.aliveTime = aliveTime;
     }
 }
 
-class itemBall{
-    constructor(x,y,destinationX,destinationY, wall, name){
+class itemBall {
+    constructor(x, y, destinationX, destinationY, wall, name) {
 
         this.color = "#6f4e37";
         this.x = x;
@@ -236,76 +236,76 @@ class itemBall{
         this.aliveTime = 1000;
         this.name = name;
     }
-    getName(){
+    getName() {
         return this.name;
     }
-    setName(name){
+    setName(name) {
         this.name = name;
     }
-    getColor(name){
-        if(name == "coffee"){
+    getColor(name) {
+        if (name == "coffee") {
             return this.color;
         }
-        else if(name == "hotsix"){
+        else if (name == "hotsix") {
             return "#0067a3";
         }
-        
+
     }
-    setColor(color){
+    setColor(color) {
         this.color = color;
     }
-    getX(){
+    getX() {
         return this.x;
     }
-    setX(x){
+    setX(x) {
         this.x = x;
     }
-    getY(){
+    getY() {
         return this.y;
     }
-    setY(y){
+    setY(y) {
         this.y = y;
     }
-    getDestinationX(){
+    getDestinationX() {
         return this.destinationX;
     }
-    setDestinationX(destinationX){
+    setDestinationX(destinationX) {
         this.destinationX = destinationX;
     }
-    getDestinationY(){
+    getDestinationY() {
         return this.destinationY;
     }
-    setDestinationY(destinationY){
+    setDestinationY(destinationY) {
         this.destinationY = destinationY;
     }
-    getInitialX(){
+    getInitialX() {
         return this.initialX;
     }
-    setInitialX(initialX){
+    setInitialX(initialX) {
         this.initialX = initialX;
     }
-    getInitialY(){
+    getInitialY() {
         return this.initialY;
     }
-    setInitialY(initialY){
+    setInitialY(initialY) {
         this.initialY = initialY;
     }
-    getWall(){
+    getWall() {
         return this.wall;
     }
-    setWall(wall){
+    setWall(wall) {
         this.wall = wall;
     }
-    getRadius(){
+    getRadius() {
         return this.radius;
     }
-    setRadius(radius){
+    setRadius(radius) {
         this.radius = radius;
     }
-    getAliveTime(){
+    getAliveTime() {
         return this.aliveTime;
     }
-    setAliveTime(aliveTime){
+    setAliveTime(aliveTime) {
         this.aliveTime = aliveTime;
     }
 }
