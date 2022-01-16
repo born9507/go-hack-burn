@@ -70,8 +70,7 @@
       li.className += 'nes-container is-rounded'
       li.id="each-chat"
       document.getElementById('message-list').appendChild(li)
-
-      window.scrollTo(0, document.body.scrollHeight)
+      document.getElementById('message-list').scrollTop = document.getElementById('message-list').scrollHeight
     })
   </script>
 </body>

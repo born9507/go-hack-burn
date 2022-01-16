@@ -7,17 +7,40 @@
     <title>Document</title>
     <link rel="stylesheet" href="/ox-quiz/ox-quiz.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/style.css">
+    
   </head>
   <body>
-    <div class="number" id="number_id">
-    </div>
+    <div class="wrapper">
+      <div class="info-container">
+        <i class="nes-ash" id="nes-ash"></i>
+        <div class="nes-container is-rounded" id="game-title">
+          OX QUIZ!<br>
+          <i class="snes-jp-logo"></i>
+        </div>
+        <div class="nes-container with-title is-dark" id="score-board">
+          <div class="title" id="board-title">SCORE BOARD</div>
+          <div id="Seoul-uni">SNU : </div>
+          <div id="Korea-uni">KU : </div>
+        </div>
+      </div>
+      <div class="canvas1">
+        <div class="number" id="number_id">
+        </div>
 
-    <div class="problem" id="problem_id">
-    </div>
+        <div class="problem" id="problem_id" style="font-family: 'NeoDunggeunmo'" >
+        </div>
 
-    <div class="answer" id="answer_id">
+        <div class="answer" id="answer_id">
+        </div>
+      </div>
+      <script src="/ox-quiz/ox-quiz.js"></script>
+      <a href="/" class="nes-badge">
+        <span class="is-warning">BACK</span>
+      </a>
     </div>
-
-    <script src="/ox-quiz/ox-quiz.js"></script>
   </body>
 </html>

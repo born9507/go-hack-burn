@@ -33,16 +33,16 @@
     </div>
   
     <div class="game__box">
-      <div>남은 시간</div>
+      <div class="left-time">남은시간: </div>
       <div id='time'></div>  
         <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
+        <input id="input-box" type="text" onkeydown="press()">
+        <!-- <button onclick="sendMessage()">전송</button> -->
+        <ul id='message-list'></ul>    
       </div>
     </div>
   </div>
 
-  <input id="input-box" type="text" onkeydown="press()">
-  <!-- <button onclick="sendMessage()">전송</button> -->
-  <ul id='message-list'></ul>
 
   <script src="/socket.io/socket.io.js"></script>
 
