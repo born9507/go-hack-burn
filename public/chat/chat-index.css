@@ -1,0 +1,93 @@
+body {
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 2em)
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  font-family: 'NeoDunggeunmo';
+	height: 80%;
+	overflow: hidden
+	/* -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 2em ) */
+}
+
+.chat-box{
+  font-family: 'NeoDunggeunmo';
+  height: 70vmax;
+  width: 40vw;
+  color: black;
+  display: flex;
+  flex-direction: column;
+}
+
+#input-box{
+  /* margin-bottom: -50%; */
+  margin-top: 20%;
+  height: 100px;
+  width: 70vmax;
+}
+
+#message-list{
+  list-style: none;
+  position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 0 0.5em 0.1em;
+	box-sizing: border-box;
+  width: 60vmax;
+  margin-left: 13vw;
+  margin-bottom: 20%;
+}
+
+#each-chat{
+  background-color: white;
+  width: 100%;
+  color: rgb(134,144,150);
+	padding: 0.2em 0.5em;
+	margin: 0.2em 0.3em 0.7em 0.3em;
+	border-radius: 0.2em;
+	box-shadow: 0 0.2em 0.3em rgba(0, 0, 0, 0.5);
+  animation: fadeInUp .5s ease, fadeOut 1s ease forwards;
+  font-size: 1.3rem;
+}
+
+#message-list>li:nth-last-child(10n-9) {
+	box-shadow: 0 0.5em 0.7em rgba(245, 25, 25, 0.25);
+}
+
+#message-list>li:nth-last-child(10n-8) {
+	box-shadow: 0 0.5em 0.7em rgba(255, 81, 0, 0.25);
+}
+
+#message-list>li:nth-last-child(10n-7) {
+	box-shadow: 0 0.5em 0.7em rgba(255, 208, 0, 0.25);
+}
+
+#message-list>li:nth-last-child(10n-6) {
+	box-shadow: 0 0.5em 0.7em rgba(81, 255, 0, 0.25);
+}
+
+#message-list>li:nth-last-child(10n-5) {
+	box-shadow: 0 0.5em 0.7em rgba(0, 255, 170, 0.25);
+}
+
+#message-list>li:nth-last-child(10n-4) {
+	box-shadow: 0 0.5em 0.7em rgba(0, 247, 255, 0.25);
+}
+
+#message-list>li:nth-last-child(10n-3) {
+	box-shadow: 0 0.5em 0.7em rgba(0, 26, 255, 0.25);
+}
+
+#message-list>li:nth-last-child(10n-2) {
+	box-shadow: 0 0.5em 0.7em rgba(111, 0, 255, 0.25);
+}
+
+#message-list>li:nth-last-child(10n-1) {
+	box-shadow: 0 0.5em 0.7em rgba(225, 0, 255, 0.25);
+}
+
+#message-list>li:nth-last-child(10n) {
+	box-shadow: 0 0.5em 0.7em rgba(255, 0, 140, 0.25);
+}

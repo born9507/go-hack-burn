@@ -2,12 +2,24 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body>
-  <h1>채팅</h1>
+  <link rel="stylesheet" href="/chat/chat-index.css">
 
-  <input id="input-box" type="text" onkeydown="press()">
+  <!-- retro nes.css framework -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"> -->
+  <!-- <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" /> -->
+  
+  <!-- font-neodgm-->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/style.css">
+</head>
+
+<body>
+  <div class="chat-box nes-container is-rounded is-drak">
   <ul id='message-list'></ul>
+  </div>
+
+  <div class="input-box">
+    <input id="input-box" type="text" onkeydown="press()">
+  </div>
 
 
   <script src="/socket.io/socket.io.js"></script>
@@ -39,6 +51,8 @@
 
       let li = document.createElement('li')
       li.innerHTML = data['name'] + ': ' + data['content']
+      li.className += 'nes-container is-rounded'
+      li.id="each-chat"
       document.getElementById('message-list').appendChild(li)
     })
   </script>
