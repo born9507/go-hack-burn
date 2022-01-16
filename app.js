@@ -58,6 +58,15 @@ app.get('/catchmind', async (req, res) => {
     where: { sessionID: req.sessionID },
   })
 
+  if (intervalId == null || timeoutId == null) {
+    await prisma.catchmindRoom.update({
+      where:{id:1},
+      data: {
+        painterId: null,
+      }
+    })
+  }
+
   if (user) {
     const catchmindRoom = await prisma.catchmindRoom.findFirst({
       where: { id: 1 },
@@ -187,7 +196,7 @@ let itemInterval;
 let intervalId;
 let timeoutId;
 
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
   console.log('a user connected');
 
   socket.join('chatRoom')
