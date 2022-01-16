@@ -325,9 +325,9 @@ class itemBall{
         var downPressed = false;
 
 
-        const rangeX = 900;
-        const canvasWidth = 700;
-        const canvasHeight = 400;
+        const rangeX = 1400;
+        const canvasWidth = 1024;
+        const canvasHeight = 768;
         const nickName = localStorage.getItem("nickName")
         document.addEventListener("keydown", keyDownHandler,false);
         document.addEventListener("keyup", keyUpHandler,false);

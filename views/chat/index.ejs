@@ -1,0 +1,45 @@
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>채팅</h1>
+
+  <input id="input-box" type="text" onkeydown="press()">
+  <ul id='message-list'></ul>
+
+
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script>
+    console.log('start')
+    var socket = io();
+
+    name = '이름' // 여기 유저가 설정한 이름으로 바꾸기
+
+    const sendMessage = () => {
+      const content = document.getElementById('input-box').value
+      socket.emit('chat/send-message', {'name': name, 'content': content })
+      document.getElementById('input-box').value = ''
+    }
+
+    const press = () => {
+      if (window.event.keyCode == 13) {
+        // 엔터키가 눌렸을 때
+        console.log('enter')
+        sendMessage()
+      }
+    }
+
+    socket.on('chat/send-message', (data) => {
+      console.log('chat/send-message');
+      const name = data['name'];
+      const content = data['content'];
+
+      let li = document.createElement('li')
+      li.innerHTML = data['name'] + ': ' + data['content']
+      document.getElementById('message-list').appendChild(li)
+    })
+  </script>
+</body>

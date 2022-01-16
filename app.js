@@ -87,6 +87,10 @@ app.get('/answerer', (req, res) => {
     res.render('catchmind/answerer');
 });
 
+app.get('/chat', (req, res) => {
+    res.render('chat/index');
+});
+
 app.get('/dodging-professor', (req, res) => {
     res.render('dodging-professor/index');
 })
@@ -110,12 +114,12 @@ function getPlayerColor() {
     return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
-const canvasWidth = 700;
-const canvasHeight = 400;
-const randomY = 400; //랜덤 생성 위치 범위 조정
-const randomX = 700; //
-// const canvasWidth = 1024;
-// const canvasHeight = 768;
+const randomY = 768; //랜덤 생성 위치 범위 조정
+const randomX = 1024; //
+const canvasWidth = 1024;
+const canvasHeight = 768;
+// const canvasWidth = 700;
+// const canvasHeight = 400;
 let enemyFrequency = 1000;
 const startX = canvasWidth / 2;
 const startY = canvasHeight / 2;
@@ -150,7 +154,6 @@ class PlayerBall {
         return this.socket.id;
     }
 }
-
 
 var balls = [];
 var ballMap = {};
@@ -197,6 +200,15 @@ io.on('connection', (socket) => {
         }
     });
 
+    socket.on('chat/send-message', (data) => {
+        console.log('chat/send-message');
+
+        const name = data['name'];
+        const content = data['content'];
+        io.in('room').emit('chat/send-message', { 'name': name, 'content': content })
+        // content 가 제시어와 일치하면 정답. 포인트 제공
+    });
+
     socket.on('catchmind/send-message', (data) => {
         console.log('catchmind/send-message');
 
@@ -215,6 +227,10 @@ io.on('connection', (socket) => {
 
     socket.on('catchmind/erase-all', (_) => {
         io.in('room').emit('catchmind/erase-all')
+    })
+
+    socket.on('catchmind/pop', (_) => {
+        console.log('pop')
     })
 
     let newBall = joinGame(socket);
