@@ -895,6 +895,11 @@ socket.on('start_game', function () {
     let bgm = document.getElementById("bgm");
     bgm.volume = 0.3;
     bgm.play();
+    if(stage % 2 == 0){ //살아있는 유저의 진영 count값에 따라서
+      let bgm = document.getElementById("bgm2");
+      bgm.volume = 0.3;
+      bgm.play();
+    }
 })
 let stageClear = false;
 socket.on('stage_clear', function (data) {//스테이지 하나가 끝난 상태
