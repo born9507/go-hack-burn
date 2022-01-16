@@ -1,7 +1,6 @@
 * {
     box-sizing: border-box;
     margin: 0px;
-    overflow: hidden;
 }
 
 html,
@@ -55,7 +54,6 @@ body {
 }
 
 #board-title {
-    padding-top: 10px;
     font-size: 0.7rem;
     margin-bottom: 8px;
 }
@@ -63,9 +61,10 @@ body {
 #score-board {
     font-size: 0.8rem;
     border: 8px double white;
-    height: 100px;
-    width: 300px;
+    width: 20vw;
+    height: 100%;
     display: inline-block;
+    position: absolute;
     margin-left: 40px;
     text-align: left;
 }
@@ -121,9 +120,6 @@ body {
     background-color: red;
     position: relative;
     left: 20%;
-}
-.info-container {
-    height: 110px;
 }
 
 .navigation__item {

@@ -3,18 +3,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/login.css">
+
+    <!-- retro nes.css framework -->
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/style.css">
   </head>
   <body>
-    <div>이름을 입력하세요</div>
-    <input id="name">
-    <div>학교를 선택하세요</div>
-    <select id="univ">
-      <option value="snu">서울대학교</option>
-      <option value="ku">고려대학교</option>
-    </select>
-
-    <button onclick="enter()">입장</button>
-
+    <div class="nes-container is-rounded">
+        <h1 style="font-family: 'NeoDunggeunmo'">
+          고학번 게임
+          <br>
+          (Go-Hack-Burn Game)
+        </h1>
+        <div class="nes-field">
+          <label for="name_field">이름을 입력하세요</label>
+          <input style="font-family: 'NeoDunggeunmo'" type="text" id="name" class="nes-input">
+        </div>
+        <div class="nes-select">
+          <label for="default_select">Select Your School</label>
+          <select style="font-family: 'NeoDunggeunmo'" required id="univ">
+            <option value="" disabled selected hidden>Select...</option>
+            <option value="snu">서울대학교</option>
+            <option value="ku">고려대학교</option>
+          </select>
+        </div>
+        <button style="font-family: 'NeoDunggeunmo'" type="button" class="nes-btn is-primary" onclick="enter()">입장</button>
+    </div>
+      <section class="message -left">
+        <div class="nes-balloon from-left">
+          <p style="font-family: 'NeoDunggeunmo'">고학번 쉼터로 놀러와</p>
+        </div>
+        <div class="icons-left">
+          <i class="nes-ash"></i>
+          <i class="nes-pokeball"></i>
+          <i class="nes-bulbasaur"></i>
+        </div>
+        <div class="icons-right">
+          <i class="nes-mario"></i>
+          <a href="https://github.com/born9507/go-hack-burn"><i class="nes-octocat animate"></i></a>
+          <i class="nes-kirby"></i>
+        </div>
+      </section>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="login.js"></script>
   </body>
