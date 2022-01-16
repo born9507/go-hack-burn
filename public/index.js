@@ -95,10 +95,6 @@ function draw() {
             upPressed = false;
         }
     })
-<<<<<<< HEAD
-
-=======
->>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
 }
 
 if (pageChange) {
