@@ -7,6 +7,12 @@ input {
     font-family: 'NeoDunggeunmo';
 }
 
+@media (max-width: 1100px) {
+     i 
+     { display: none; } 
+    }
+
+
 .nes-container {
     width: 30em;
     display: flex;

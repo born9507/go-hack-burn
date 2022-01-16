@@ -156,7 +156,7 @@ function draw() {
         var h5y2 = (dino.y + dino.height) - (house14.y + 25);
 
         if ((h5x1 <= 0) && (h5y1 < 0) && (h5x2 > 0) && (h5y2 > 0)) {
-            console.log("채팅방에 입장하셨습니다.")
+            location.href = "/chat/"
         }
 
 
