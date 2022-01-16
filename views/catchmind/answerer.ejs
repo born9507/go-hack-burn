@@ -2,13 +2,43 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>catchmind</title>
+  <link rel="stylesheet" href="answerer.css">
+
+  <!-- for nes.css framework -->
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+  <link href="https://unpkg.com/nes.css/css/nes.css" rel="stylesheet" />
+
+  <!-- for Korean retro font -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm/style.css">
+
 </head>
 <body>
-  <h1>캐치마인드 - 정답 맞추기</h1>
-  <div>남은 시간</div>
-  <div id='time'></div>
 
-  <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
+  <div class="wrapper">
+    <div class="info-container">
+      <a href="/" class="nes-badge" id="nes-badge">
+        <span class="is-warning">BACK</span>
+      </a>    
+      <i class="nes-ash" id="nes-ash"></i>
+      <div class="nes-container is-rounded" id="game-title">
+        CatchMind !<br>
+        <i class="snes-jp-logo"></i>
+      </div>
+      <div class="nes-container with-title is-dark" id="score-board">
+        <div class="title" id="board-title">SCORE BOARD</div>
+        <div id="Seoul-uni">SNU : </div>
+        <div id="Korea-uni">KU : </div>
+      </div>
+    </div>
+  
+    <div class="game__box">
+      <div>남은 시간</div>
+      <div id='time'></div>  
+        <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
+      </div>
+    </div>
+  </div>
 
   <input id="input-box" type="text" onkeydown="press()">
   <!-- <button onclick="sendMessage()">전송</button> -->
