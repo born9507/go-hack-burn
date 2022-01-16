@@ -5,6 +5,8 @@
 </head>
 <body>
   <h1>캐치마인드 - 정답 맞추기</h1>
+  <div>남은 시간</div>
+  <div id='time'></div>
 
   <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
 
@@ -12,12 +14,37 @@
   <!-- <button onclick="sendMessage()">전송</button> -->
   <ul id='message-list'></ul>
 
-
   <script src="/socket.io/socket.io.js"></script>
 
   <script>
     console.log('start')
     var socket = io();
+
+    var id = "<%= id %>"
+
+    socket.emit('catchmind/answerer-enter', {'id' : id})
+
+    socket.on('catchmind/time-left', (data) => {
+      document.getElementById('time').innerText = data['timeLeft']
+    })
+    socket.on('catchmind/expire', (_) => {
+      console.log('expire')
+
+      let li = document.createElement('li')
+      li.innerHTML = '시간초과! 새로고침하세요'
+      document.getElementById('message-list').appendChild(li)
+      socket.disconnect()
+    })
+    socket.on('catchmind/right-answer', (data) => {
+      console.log('right-answer')
+
+      let li = document.createElement('li')
+      li.innerHTML = '정답! 새로고침하세요'
+      document.getElementById('message-list').appendChild(li)
+      socket.disconnect()
+    })
+
+    // socket.emit('catchmind/register-answerer-socketID', { 'sessionID': document.cookie['session.id'] })
 
     const sendMessage = () => {
       const content = document.getElementById('input-box').value

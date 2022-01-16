@@ -55,21 +55,26 @@ app.post('/api/login', async (req, res) => {
 
 app.get('/catchmind', async (req, res) => {
   const user = await prisma.user.findUnique({
-    where: {sessionID: req.sessionID},
+    where: { sessionID: req.sessionID },
   })
 
-  let catchmindRoom = await prisma.catchmindRoom.findUnique({where: {id: 1}})
-  if (!catchmindRoom) {
-    if (user) {
-      catchmindRoom = await prisma.catchmindRoom.create({data: {painterId: user.id}})
-    }
-  }
+  if (user) {
+    const catchmindRoom = await prisma.catchmindRoom.findFirst({
+      where: { id: 1 },
+    })
 
-  if (catchmindRoom.painterId == user.id) {
-    // 내가 painter 인 경우
-    res.render('catchmind/painter')
+    if (catchmindRoom.painterId == null) {
+      await prisma.catchmindRoom.update({
+        where: { id: 1 },
+        data: { painterId: user.id }
+      })
+      // 내가 painter 인 경우
+      res.render('catchmind/painter', { 'id': user.id, 'sessionID': user.sessionID })
+    } else {
+      res.render('catchmind/answerer', { 'id': user.id, 'sessionID': user.sessionID })
+    }
   } else {
-    res.render('catchmind/answerer')
+    res.redirect('/')
   }
 });
 
@@ -77,16 +82,15 @@ app.get('/dodging-obstacle', (req, res) => {
   res.render('dodging-obstacle/index');
 });
 
-app.get('/painter', (req, res) => {
-  res.render('catchmind/painter');
-});
-
-app.get('/answerer', (req, res) => {
-  res.render('catchmind/answerer');
-});
-
-app.get('/chat', (req, res) => {
-  res.render('chat/index');
+app.get('/chat', async (req, res) => {
+  const user = await prisma.user.findUnique({
+    where: {sessionID: req.sessionID},
+  })
+  if (user) {
+    res.render('chat/index');
+  } else {
+    res.redirect('/')
+  }
 });
 
 app.get('/dodging-professor', (req, res) => {
@@ -180,14 +184,25 @@ let isAccessFail = false;
 let enemyInterval;
 let itemInterval;
 
+let intervalId;
+let timeoutId;
 
 io.on('connection', (socket) => {
   console.log('a user connected');
 
-  socket.join('room')
+  socket.join('chatRoom')
+  socket.join('catchmindRoom')
 
-  socket.on('disconnect', () => {
+  socket.on('catchmind/expire', async (data) => {
+    console.log('catchmind/expire')
+    console.log(await io.in('catchmindRoom').fetchSockets())
+  })
+
+  socket.on('disconnect', async () => {
     console.log('user disconnected');
+
+    console.log(socket.id)
+
     endGame(socket);
     io.sockets.emit('leave_user', socket.id);
     if(balls.length == 0){
@@ -203,28 +218,92 @@ io.on('connection', (socket) => {
 
     const name = data['name'];
     const content = data['content'];
-    io.in('room').emit('chat/send-message', {'name': name, 'content': content})
-    // content 가 제시어와 일치하면 정답. 포인트 제공
+    io.in('chatRoom').emit('chat/send-message', {'name': name, 'content': content})
   });
 
-  socket.on('catchmind/send-message', (data) => {
+  socket.on('catchmind/send-message', async (data) => {
     console.log('catchmind/send-message');
 
+    const name = data['name'];
     const content = data['content'];
-    io.in('room').emit('catchmind/send-message', {'content': content})
+    io.in('catchmindRoom').emit('catchmind/send-message', {'name': name, 'content': content})
 
     // content 가 제시어와 일치하면 정답. 포인트 제공
+    const room = await prisma.catchmindRoom.findUnique({
+      where:{id:1},
+    })
+
+    // 정답인 경우
+    if (data['content'] == room.solution) {
+      io.in('catchmindRoom').emit('catchmind/right-answer', {'name': name, 'content': content})
+
+      await prisma.catchmindRoom.update({
+        where:{id:1},
+        data: {
+          painterId: null,
+        }
+      })
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+    }
   });
 
+  socket.on('catchmind/painter-enter', async (data) => {
+    var userId = data['id'];
+
+    solutions = [
+      '으악',
+      '멋사',
+      '사자',
+    ]
+
+    var solution = solutions[Math.floor(Math.random() * solutions.length)];
+
+    socket.emit('catchmind/solution', {'solution': solution})
+
+    await prisma.catchmindRoom.update({
+      where:{id:1},
+      data: {
+        painterId: Number(userId),
+        solution: solution,
+      }
+    })
+
+    var time = 30;
+    var timeLeft = time;
+
+    intervalId = setInterval(async () => {
+      if(timeLeft > 0) {
+        io.in('catchmindRoom').emit('catchmind/time-left', {'timeLeft': timeLeft})
+        timeLeft = timeLeft - 1;
+      }
+    }, 1000);
+    timeoutId = setTimeout(async () => {
+      await prisma.catchmindRoom.update({
+        where:{id:1},
+        data: {
+          painterId: null,
+        }
+      })
+      io.in('catchmindRoom').emit('catchmind/expire')
+
+      clearInterval(intervalId);
+      clearTimeout(timeoutId);
+    }, time * 1000);
+  })
+
+  socket.on('catchmind/answerer-enter', async (data) => {
+  })
+
   socket.on('catchmind/painting', (data) => {
-    io.in('room').emit('catchmind/painting', data)
+    io.in('catchmindRoom').emit('catchmind/painting', data)
   })
   socket.on('catchmind/not-painting', (data) => {
-    io.in('room').emit('catchmind/not-painting', data)
+    io.in('catchmindRoom').emit('catchmind/not-painting', data)
   })
 
   socket.on('catchmind/erase-all', (_) => {
-    io.in('room').emit('catchmind/erase-all')
+    io.in('catchmindRoom').emit('catchmind/erase-all')
   })
 
   socket.on('catchmind/pop', (_) => {
