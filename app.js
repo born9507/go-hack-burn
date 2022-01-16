@@ -63,11 +63,11 @@ app.get('/catchmind', async (req, res) => {
       where: { id: 1 },
     })
 
-    if (catchmindRoom.painterId == null) {
-      await prisma.catchmindRoom.update({
-        where: { id: 1 },
-        data: { painterId: user.id }
-      })
+    if (catchmindRoom.painterId == null || catchmindRoom.painterId == user.id) {
+      // await prisma.catchmindRoom.update({
+      //   where: { id: 1 },
+        // data: { painterId: user.id }
+      // })
       // 내가 painter 인 경우
       res.render('catchmind/painter', { 'id': user.id, 'sessionID': user.sessionID })
     } else {
@@ -249,7 +249,19 @@ io.on('connection', (socket) => {
   });
 
   socket.on('catchmind/painter-enter', async (data) => {
+    console.log('catchmind/painter-enter')
     var userId = data['id'];
+
+    let room = await prisma.catchmindRoom.findUnique({
+      where:{id:1},
+    })
+
+    // 그리던 사람이 새로고침할 때
+    if (room.painterId === Number(userId)) {
+      console.log('same!!')
+      socket.emit('catchmind/solution', {'solution': room.solution})
+      return
+    }
 
     solutions = [
       '으악',
