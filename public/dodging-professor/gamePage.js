@@ -824,7 +824,6 @@ function renderTimer() {
     ctx.fillStyle = '#000000';
     ctx.font = '20px Arial';
     ctx.fillText(`Timer ${timer.toFixed(2)}`, 30, 50);
-    ctx.fillText(`Score ${score.toFixed(2)}`, 30, 70);
     ctx.closePath();
 
 }
@@ -869,6 +868,7 @@ function renderGame() {
     if (isStart) {
         timer -= 0.010;
         score += 0.010;
+        document.getElementById("score").innerText = Math.ceil(score) * 10
         if (parseInt(timer) <= 0) {
             timer = 0;
         }

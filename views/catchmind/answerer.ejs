@@ -19,7 +19,7 @@
     <div class="info-container">
       <a href="/" class="nes-badge" id="nes-badge">
         <span class="is-warning">BACK</span>
-      </a>    
+      </a>
       <i class="nes-ash" id="nes-ash"></i>
       <div class="nes-container is-rounded" id="game-title">
         CatchMind !<br>
@@ -27,18 +27,21 @@
       </div>
       <div class="nes-container with-title is-dark" id="score-board">
         <div class="title" id="board-title">SCORE BOARD</div>
-        <div id="Seoul-uni">SNU : </div>
-        <div id="Korea-uni">KU : </div>
+        <div id="Seoul-uni">SNU : <%= pointSnu %></div>
+        <div id="Korea-uni">KU : <%= pointKu %></div>
       </div>
     </div>
-  
+
     <div class="game__box">
-      <div class="left-time">남은시간: </div>
-      <div id='time'></div>  
+      <div style="display: flex; flex-direction: column;">
+        <div class="left-time">남은시간: </div>
+        <div id='time'></div>
         <canvas id="jsCanvas" style="border: 1px solid black"></canvas>
+      </div>
+      <div style="display: flex; flex-direction: column;">
         <input id="input-box" type="text" onkeydown="press()">
         <!-- <button onclick="sendMessage()">전송</button> -->
-        <ul id='message-list'></ul>    
+        <ul id='message-list'></ul>
       </div>
     </div>
   </div>
@@ -51,6 +54,7 @@
     var socket = io();
 
     var id = "<%= id %>"
+    var name = "<%= name %>"
 
     socket.emit('catchmind/answerer-enter', {'id' : id})
 
@@ -78,7 +82,7 @@
 
     const sendMessage = () => {
       const content = document.getElementById('input-box').value
-      socket.emit('catchmind/send-message', {'content': content })
+      socket.emit('catchmind/send-message', {'id': id, 'name': name, 'content': content })
       document.getElementById('input-box').value = ''
     }
 
@@ -104,8 +108,14 @@
       const content = data['content'];
 
       let li = document.createElement('li')
-      li.innerHTML = data['content']
+      li.innerHTML = data['name'] + ': ' + data['content']
       document.getElementById('message-list').appendChild(li)
+    })
+
+    socket.on('point-change', (data) => {
+      console.log('point-change')
+      console.log(data['catchmind']['snu'])
+      console.log(data['catchmind']['ku'])
     })
 
     // canvas

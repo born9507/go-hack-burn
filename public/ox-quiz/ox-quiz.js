@@ -39,6 +39,7 @@ function btnOFunc() {
 	selectAnswer = "O";
 	if (answer_arr[startNum] == selectAnswer) {
 		score++;
+		document.getElementById("score").innerText = score
 	}
 	startNum++;
 	setProblem();
@@ -48,6 +49,7 @@ function btnXFunc() {
 	selectAnswer = "X";
 	if (answer_arr[startNum] == selectAnswer) {
 		score++;
+		document.getElementById("score").innerText = score
 	}
 	startNum++;
 	setProblem();
