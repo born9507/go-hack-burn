@@ -7,13 +7,6 @@ input {
     font-family: 'NeoDunggeunmo';
 }
 
-@media (max-width: 10px) {
-    .nes-balloon,
-    i {
-        display: none !important;
-    }
-}
-
 .nes-container {
     width: 30em;
     display: flex;
