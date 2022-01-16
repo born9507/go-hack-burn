@@ -19,6 +19,11 @@ function draw() {
     var Pstar = new Image();
     Pstar.src = 'Pstar.png';
 
+    let bgm = document.getElementById("bgm");
+    bgm.volume = 0.3;
+    bgm.play();
+
+
     class Stars {
         constructor() {
             this.x = Math.floor(Math.random() * 1500);

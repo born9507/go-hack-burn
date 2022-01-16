@@ -57,6 +57,9 @@
 
     socket.on('catchmind/solution', (data) => {
       document.getElementById('solution').innerText = data['solution']
+      let bgm = document.getElementById("bgm");
+      bgm.volume = 0.3;
+      bgm.play();
     })
 
     socket.on('catchmind/time-left', (data) => {
@@ -146,4 +149,13 @@
       });
     }
   </script>
+
+  <audio
+  controls id="bgm"
+  hidden='true'>
+
+  <source
+      src="/dodging-professor/sounds/cherry.mp3"
+      type="audio/mp3">
+  </audio>
 </body>

@@ -51,7 +51,7 @@
 
     const sendMessage = () => {
       const content = document.getElementById('input-box').value
-      socket.emit('chat/send-message', {'name': name, 'content': content })
+      socket.emit('chat/send-message', {'name': name, 'content': content },)
       document.getElementById('input-box').value = ''
     }
 
@@ -76,4 +76,5 @@
       document.getElementById('message-list').scrollTop = document.getElementById('message-list').scrollHeight
     })
   </script>
+
 </body>

@@ -4,6 +4,9 @@ var answer_arr = ['O', 'X', 'O', 'X', 'O'];
 
 var selectAnswer, score;
 var imgNum, startNum, endNum;
+let bgm = document.getElementById("bgm");
+// bgm.volume = 0.3;
+// bgm.play();
 
 function init() {
 	number_id = document.getElementById("number_id");
