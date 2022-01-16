@@ -81,9 +81,21 @@ app.get('/catchmind', async (req, res) => {
     console.log(user.id)
 
     if (catchmindRoom.painterId == null || catchmindRoom.painterId == user.id) {
-      res.render('catchmind/painter', { 'id': user.id, 'name': user.name, 'sessionID': user.sessionID })
+      res.render('catchmind/painter', {
+        'id': user.id,
+        'name': user.name,
+        'sessionID': user.sessionID,
+        'pointSnu': catchmindRoom.pointSnu,
+        'pointKu': catchmindRoom.pointKu,
+      })
     } else {
-      res.render('catchmind/answerer', { 'id': user.id, 'name': user.name, 'sessionID': user.sessionID })
+      res.render('catchmind/answerer', {
+        'id': user.id,
+        'name': user.name,
+        'sessionID': user.sessionID,
+        'pointSnu': catchmindRoom.pointSnu,
+        'pointKu': catchmindRoom.pointKu,
+      })
     }
   } else {
     res.redirect('/')
@@ -254,16 +266,49 @@ io.on('connection', async (socket) => {
 
         // 정답인 경우
         if (data['content'] == room.solution) {
-            io.in('catchmindRoom').emit('catchmind/right-answer', { 'name': name, 'content': content })
+          io.in('catchmindRoom').emit('catchmind/right-answer', { 'name': name, 'content': content })
 
+          await prisma.catchmindRoom.update({
+              where: { id: 1 },
+              data: {
+                  painterId: null,
+              }
+          })
+          clearInterval(intervalId);
+          clearTimeout(timeoutId);
+
+          var id = data['id']
+          var paintPoint = 5
+          var answerPoint = 10
+
+          const painter = await prisma.user.findUnique({where: {id: room.painterId}})
+          const answerer = await prisma.user.findUnique({where: {id: Number(data['id'])}});
+
+          if (painter.univ === 'snu') {
             await prisma.catchmindRoom.update({
-                where: { id: 1 },
-                data: {
-                    painterId: null,
-                }
+              where: {id: 1},
+              data: { pointSnu: {increment: paintPoint} }
             })
-            clearInterval(intervalId);
-            clearTimeout(timeoutId);
+          } else if (painter.univ == 'ku') {
+            await prisma.catchmindRoom.update({
+              where: {id: 1},
+              data: { pointKu: {increment: paintPoint} }
+            })
+          }
+
+          let catchmindRoom;
+
+          if (answerer.univ == 'snu') {
+            catchmindRoom = await prisma.catchmindRoom.update({
+              where: {id: 1},
+              data: { pointSnu: {increment: answerPoint} }
+            })
+          } else if (answerer.univ == 'ku') {
+            catchmindRoom = await prisma.catchmindRoom.update({
+              where: {id: 1},
+              data: { pointKu: {increment: answerPoint} }
+            })
+          }
         }
     });
 
