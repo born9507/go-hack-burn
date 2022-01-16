@@ -77,6 +77,9 @@ app.get('/catchmind', async (req, res) => {
       where: { id: 1 },
     })
 
+    console.log(catchmindRoom.painterId)
+    console.log(user.id)
+
     if (catchmindRoom.painterId == null || catchmindRoom.painterId == user.id) {
       res.render('catchmind/painter', { 'id': user.id, 'sessionID': user.sessionID })
     } else {
