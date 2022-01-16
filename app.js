@@ -54,28 +54,40 @@ app.post('/api/login', async (req, res) => {
 })
 
 app.get('/catchmind', async (req, res) => {
-    const user = await prisma.user.findUnique({
-        where: { sessionID: req.sessionID },
+  const user = await prisma.user.findUnique({
+    where: { sessionID: req.sessionID },
+  })
+
+  const catchmindRoom = await prisma.catchmindRoom.findUnique({where:{id:1}})
+  if (!catchmindRoom) {
+    await prisma.catchmindRoom.create({data: {}});
+  }
+
+  if (intervalId == null || timeoutId == null) {
+    await prisma.catchmindRoom.update({
+      where:{id:1},
+      data: {
+        painterId: null,
+      }
+    })
+  }
+
+  if (user) {
+    const catchmindRoom = await prisma.catchmindRoom.findFirst({
+      where: { id: 1 },
     })
 
-    if (user) {
-        const catchmindRoom = await prisma.catchmindRoom.findFirst({
-            where: { id: 1 },
-        })
+    console.log(catchmindRoom.painterId)
+    console.log(user.id)
 
-        if (catchmindRoom.painterId == null || catchmindRoom.painterId == user.id) {
-            // await prisma.catchmindRoom.update({
-            //   where: { id: 1 },
-            // data: { painterId: user.id }
-            // })
-            // 내가 painter 인 경우
-            res.render('catchmind/painter', { 'id': user.id, 'sessionID': user.sessionID })
-        } else {
-            res.render('catchmind/answerer', { 'id': user.id, 'sessionID': user.sessionID })
-        }
+    if (catchmindRoom.painterId == null || catchmindRoom.painterId == user.id) {
+      res.render('catchmind/painter', { 'id': user.id, 'name': user.name, 'sessionID': user.sessionID })
     } else {
-        res.redirect('/')
+      res.render('catchmind/answerer', { 'id': user.id, 'name': user.name, 'sessionID': user.sessionID })
     }
+  } else {
+    res.redirect('/')
+  }
 });
 
 app.get('/dodging-obstacle', (req, res) => {
@@ -90,7 +102,7 @@ app.get('/chat', async (req, res) => {
         where: { sessionID: req.sessionID },
     })
     if (user) {
-        res.render('chat/index');
+        res.render('chat/index', {'name': user.name});
     } else {
         res.redirect('/')
     }
@@ -194,8 +206,8 @@ let itemInterval;
 let intervalId;
 let timeoutId;
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
+io.on('connection', async (socket) => {
+  console.log('a user connected');
 
     socket.join('chatRoom')
     socket.join('catchmindRoom')
@@ -271,9 +283,87 @@ io.on('connection', (socket) => {
         }
 
         solutions = [
-            '으악',
-            '멋사',
-            '사자',
+          '멋사',
+          '사자',
+          '강변',
+          '퇴학',
+          '우거지',
+          '대피소',
+          '샴푸',
+          '피고인',
+          '핵가족',
+          '연장전',
+          '크라잉넛',
+          '포크레인',
+          '바이오리듬',
+          '삼국시대',
+          '풍년',
+          '작업모',
+          '눈안개',
+          '새우젓',
+          '프라이드치킨',
+          '열매',
+          '소방관',
+          '가라오케',
+          '창세기',
+          '잎새',
+          '인쇄소',
+          '슈퍼주니어',
+          '전사자',
+          '진심',
+          '집중',
+          '잡종',
+          '태양',
+          '조선소',
+          '손맛',
+          '이모',
+          '귓속말',
+          '백수',
+          '공고문',
+          '카레이서',
+          '쓰레기차',
+          '진공청소기',
+          '우거지',
+          '일간신문',
+          '개인기',
+          '김경호',
+          '가격표',
+          '가로수',
+          '산모',
+          '알까기',
+          '카카오나무',
+          '홍삼',
+          '차세대',
+          '개발제한',
+          '키보드',
+          '사건',
+          '도도새',
+          '백댄서',
+          '경찰',
+          '고드름',
+          '코너킥',
+          '도끼',
+          '바이올린',
+          '팬미팅',
+          '냉커피',
+          '도토리묵',
+          '웅변',
+          '북극여우',
+          '신세계',
+          '물건',
+          '사무직',
+          '서라벌',
+          '발가락',
+          '베개',
+          '우럭',
+          '가시',
+          '북극곰',
+          '위기',
+          '소나기',
+          '주유소',
+          '버섯',
+          '피서',
+          '약국',
         ]
 
         var solution = solutions[Math.floor(Math.random() * solutions.length)];
@@ -1018,6 +1108,8 @@ io.on('connection', (socket) => {
     }
 });
 
-server.listen(3000, () => {
-    console.log('listening on *:3000');
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+  console.log(`listening on *:${PORT}`);
 });
