@@ -54,28 +54,35 @@ app.post('/api/login', async (req, res) => {
 })
 
 app.get('/catchmind', async (req, res) => {
-    const user = await prisma.user.findUnique({
-        where: { sessionID: req.sessionID },
+  const user = await prisma.user.findUnique({
+    where: { sessionID: req.sessionID },
+  })
+
+  const catchmindRoom = await prisma.catchmindRoom.findUnique({where:{id:1}})
+  if (!catchmindRoom) {
+    await prisma.catchmindRoom.create({data: {}});
+  }
+
+  if (intervalId == null || timeoutId == null) {
+    await prisma.catchmindRoom.update({
+      where:{id:1},
+      data: {
+        painterId: null,
+      }
+    })
+  }
+
+  if (user) {
+    const catchmindRoom = await prisma.catchmindRoom.findFirst({
+      where: { id: 1 },
     })
 
-    if (user) {
-        const catchmindRoom = await prisma.catchmindRoom.findFirst({
-            where: { id: 1 },
-        })
-
-        if (catchmindRoom.painterId == null || catchmindRoom.painterId == user.id) {
-            // await prisma.catchmindRoom.update({
-            //   where: { id: 1 },
-            // data: { painterId: user.id }
-            // })
-            // 내가 painter 인 경우
-            res.render('catchmind/painter', { 'id': user.id, 'sessionID': user.sessionID })
-        } else {
-            res.render('catchmind/answerer', { 'id': user.id, 'sessionID': user.sessionID })
-        }
+    if (catchmindRoom.painterId == null || catchmindRoom.painterId == user.id) {
+      res.render('catchmind/painter', { 'id': user.id, 'sessionID': user.sessionID })
     } else {
         res.redirect('/')
     }
+  }
 });
 
 app.get('/dodging-obstacle', (req, res) => {
@@ -194,8 +201,8 @@ let itemInterval;
 let intervalId;
 let timeoutId;
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
+io.on('connection', async (socket) => {
+  console.log('a user connected');
 
     socket.join('chatRoom')
     socket.join('catchmindRoom')
@@ -1018,6 +1025,8 @@ io.on('connection', (socket) => {
     }
 });
 
-server.listen(3000, () => {
-    console.log('listening on *:3000');
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => {
+  console.log(`listening on *:${PORT}`);
 });

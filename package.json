@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+
+  "engines":{
+    "node": "v16.8.0" ,
+    "npm": "7.24.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx prisma db push && node app.js"
   },
   "author": "",
   "license": "ISC",

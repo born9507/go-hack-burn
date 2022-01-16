@@ -22,4 +22,24 @@ model CatchmindRoom {
   painterId Int?
   answererList String?
   solution  String?
+  pointSnu  Int @default(0)
+  pointKu   Int @default(0)
+}
+
+model OxGameRoom {
+  id Int @id @default(autoincrement())
+  pointSnu  Int @default(0)
+  pointKu   Int @default(0)
+}
+
+model StarGameRoom {
+  id Int @id @default(autoincrement())
+  pointSnu  Int @default(0)
+  pointKu   Int @default(0)
+}
+
+model DodgingGameRoom {
+  id Int @id @default(autoincrement())
+  pointSnu  Int @default(0)
+  pointKu   Int @default(0)
 }
