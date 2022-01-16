@@ -58,6 +58,11 @@ app.get('/catchmind', async (req, res) => {
     where: { sessionID: req.sessionID },
   })
 
+  const catchmindRoom = await prisma.catchmindRoom.findUnique({where:{id:1}})
+  if (!catchmindRoom) {
+    await prisma.catchmindRoom.create();
+  }
+
   if (intervalId == null || timeoutId == null) {
     await prisma.catchmindRoom.update({
       where:{id:1},
@@ -73,11 +78,6 @@ app.get('/catchmind', async (req, res) => {
     })
 
     if (catchmindRoom.painterId == null || catchmindRoom.painterId == user.id) {
-      // await prisma.catchmindRoom.update({
-      //   where: { id: 1 },
-        // data: { painterId: user.id }
-      // })
-      // 내가 painter 인 경우
       res.render('catchmind/painter', { 'id': user.id, 'sessionID': user.sessionID })
     } else {
       res.render('catchmind/answerer', { 'id': user.id, 'sessionID': user.sessionID })
