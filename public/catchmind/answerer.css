@@ -178,10 +178,6 @@ ul{
   margin-right:25px;
 }
 
-.left-time{
-  font-family: 'NeoDunggeunmo';
-}
-
-ul, button {
+.game__box{
   font-family: 'NeoDunggeunmo';
 }
