@@ -132,7 +132,7 @@ function draw() {
         var h2y2 = (dino.y + dino.height) - (house11.y + 25);
 
         if ((h2x1 <= 0) && (h2y1 < 0) && (h2x2 > 0) && (h2y2 > 0)) {
-            location.href = "/dodging-obstacle"
+            location.href = "/ox-quiz/"
         }
         var h3x1 = dino.x - (house12.x + house12.width);
         var h3x2 = (dino.x + dino.width) - (house12.x + 25);
@@ -172,7 +172,6 @@ function draw() {
     document.addEventListener('keydown', function (e) {
         if (e.code == 'ArrowRight') {
             rightPressed = true;
-
         }
         if (e.code == 'ArrowLeft') {
             leftPressed = true;
