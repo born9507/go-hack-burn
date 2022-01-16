@@ -30,8 +30,11 @@ button{
     padding: 5px 30px;
     margin-bottom: 20px;
     font-weight: bold;
+<<<<<<< HEAD
     margin-left: 220px;
 
+=======
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
 }
 
 button:hover{
@@ -57,6 +60,7 @@ button:hover{
     padding-left: 4rem;
     padding-right: 4rem;
     margin-bottom: 10px;
+<<<<<<< HEAD
 }
 
 .font-neodgm{
@@ -67,4 +71,6 @@ button:hover{
 h2{
   text-align: center;
   padding:5px 0 10px 0;
+=======
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
 }

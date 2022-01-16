@@ -85,6 +85,13 @@ app.get('/answerer', (req, res) => {
   res.render('catchmind/answerer');
 });
 
+<<<<<<< HEAD
+=======
+app.get('/chat', (req, res) => {
+  res.render('chat/index');
+});
+
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
 app.get('/dodging-professor', (req, res) => {
   res.render('dodging-professor/index');
 })
@@ -108,12 +115,21 @@ function getPlayerColor(){
   return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
+<<<<<<< HEAD
 const randomY = 768; //랜덤 생성 위치 범위 조정
 const randomX = 1024; //
 const canvasWidth = 1024;
 const canvasHeight = 768;
 // const canvasWidth = 700;
 // const canvasHeight = 400;
+=======
+const canvasWidth = 700;
+const canvasHeight = 400;
+const randomY = 400; //랜덤 생성 위치 범위 조정
+const randomX = 700; //
+// const canvasWidth = 1024;
+// const canvasHeight = 768;
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
 let enemyFrequency = 1000;
 const startX = canvasWidth/2;
 const startY = canvasHeight/2;
@@ -149,7 +165,10 @@ class PlayerBall{
   }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
 var balls = [];
 var ballMap = {};
 
@@ -195,6 +214,18 @@ io.on('connection', (socket) => {
     }
   });
 
+<<<<<<< HEAD
+=======
+  socket.on('chat/send-message', (data) => {
+    console.log('chat/send-message');
+
+    const name = data['name'];
+    const content = data['content'];
+    io.in('room').emit('chat/send-message', {'name': name, 'content': content})
+    // content 가 제시어와 일치하면 정답. 포인트 제공
+  });
+
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
   socket.on('catchmind/send-message', (data) => {
     console.log('catchmind/send-message');
 
@@ -215,6 +246,13 @@ io.on('connection', (socket) => {
     io.in('room').emit('catchmind/erase-all')
   })
 
+<<<<<<< HEAD
+=======
+  socket.on('catchmind/pop', (_) => {
+    console.log('pop')
+  })
+
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
   let newBall = joinGame(socket);
 
     socket.emit('user_id', socket.id);
@@ -326,7 +364,11 @@ io.on('connection', (socket) => {
                 })
             }
             var randomStartY = Math.floor(Math.random() * randomY)
+<<<<<<< HEAD
             var randomDestinationY = Math.floor(Math.random() * randomY)
+=======
+            var randomDestinationY = Math.floor(Math.random() * ra)
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
             io.sockets.emit('enemy_generator', {
                 wall : 0,
                 startingX:  enemyRadius,
@@ -418,18 +460,29 @@ io.on('connection', (socket) => {
     })();
 
     let itemTime = 5;
+<<<<<<< HEAD
     let adjustDifficulty = 1
+=======
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
     const StageOne = (function(){//전략패턴 사용
         function StageOne(){}
         StageOne.prototype.start = function(){
             let count = 0;
             let stage = 1;
+<<<<<<< HEAD
             enemyFrequency = (1000*adjustDifficulty);
+=======
+            enemyFrequency = 1000;
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
             enemyInterval = setInterval(function () {
                 enemyGenerator();
                 count += 1;
 
+<<<<<<< HEAD
                 if (Math.floor(count) >= (15/adjustDifficulty)){
+=======
+                if (Math.floor(count) >= 15){
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
                     clearInterval(enemyInterval);
                     for (var i = 0 ; i < balls.length ; i++){
                             balls[i].state = 1;
@@ -448,7 +501,11 @@ io.on('connection', (socket) => {
             let stage = 2;
             let itemMaximum = 1;
             let itemCount = 0;
+<<<<<<< HEAD
             enemyFrequency = (950*adjustDifficulty);
+=======
+            enemyFrequency = 900;
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
             enemyInterval = setInterval(function () {
                 enemyGenerator();
                 count += 1;
@@ -458,7 +515,11 @@ io.on('connection', (socket) => {
                     itemGenerator("hotsix");
                     itemCount++;
                 }
+<<<<<<< HEAD
                 if (Math.floor(count) >= (17/adjustDifficulty)){
+=======
+                if (Math.floor(count) >= 17){
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
                     clearInterval(enemyInterval);
                     for (var i = 0 ; i < balls.length ; i++){
                         balls[i].state = 1;
@@ -477,7 +538,11 @@ io.on('connection', (socket) => {
             let stage = 3;
             let itemMaximum = 1;
             let itemCount = 0;
+<<<<<<< HEAD
             enemyFrequency = (800*adjustDifficulty);
+=======
+            enemyFrequency = 800;
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
             enemyInterval = setInterval(function () {
                 enemyGenerator();
                 count += 1;
@@ -490,7 +555,11 @@ io.on('connection', (socket) => {
                 if(count == 5){
                     straightEnemyGenerator(1);
                 }
+<<<<<<< HEAD
                 if (Math.floor(count) >= (19/adjustDifficulty)){
+=======
+                if (Math.floor(count) >= 19){
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
                     clearInterval(enemyInterval);
                     for (var i = 0 ; i < balls.length ; i++){
                         balls[i].state = 1;
@@ -509,7 +578,11 @@ io.on('connection', (socket) => {
             let stage = 4;
             let itemMaximum = 1;
             let itemCount = 0;
+<<<<<<< HEAD
             enemyFrequency = 700*adjustDifficulty;
+=======
+            enemyFrequency = 700;
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
             enemyInterval = setInterval(function () {
                 enemyGenerator();
                 count += 1;
@@ -522,7 +595,11 @@ io.on('connection', (socket) => {
                 if(count == 5){
                     straightEnemyGenerator(0);
                 }
+<<<<<<< HEAD
                 if (Math.floor(count) >= (22/adjustDifficulty)){
+=======
+                if (Math.floor(count) >= 22){
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
                     clearInterval(enemyInterval);
                     for (var i = 0 ; i < balls.length ; i++){
                         balls[i].state = 1;
@@ -541,7 +618,11 @@ io.on('connection', (socket) => {
             let stage = 5;
             let itemMaximum = 1;
             let itemCount = 0;
+<<<<<<< HEAD
             enemyFrequency = 600*adjustDifficulty;
+=======
+            enemyFrequency = 600;
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
             enemyInterval = setInterval(function () {
                 enemyGenerator();
                 count += 1;
@@ -554,7 +635,11 @@ io.on('connection', (socket) => {
                 if(count == 4 || count == 9){
                     straightEnemyGenerator(1);
                 }
+<<<<<<< HEAD
                 if (Math.floor(count) >= (26/adjustDifficulty)){
+=======
+                if (Math.floor(count) >= 26){
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
                     clearInterval(enemyInterval);
                     for (var i = 0 ; i < balls.length ; i++){
                         balls[i].state = 1;
@@ -573,7 +658,11 @@ io.on('connection', (socket) => {
             let stage = 6;
             let itemMaximum = 1;
             let itemCount = 0;
+<<<<<<< HEAD
             enemyFrequency = 550*adjustDifficulty;
+=======
+            enemyFrequency = 550;
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
             enemyInterval = setInterval(function () {
                 enemyGenerator();
                 count += 1;
@@ -586,7 +675,11 @@ io.on('connection', (socket) => {
                 if(count == 4 || count == 9){
                     straightEnemyGenerator(0);
                 }
+<<<<<<< HEAD
                 if (Math.floor(count) >= (28/adjustDifficulty)){
+=======
+                if (Math.floor(count) >= 28){
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
                     clearInterval(enemyInterval);
                     for (var i = 0 ; i < balls.length ; i++){
                         balls[i].state = 1;
@@ -605,7 +698,11 @@ io.on('connection', (socket) => {
             let stage = 7;
             let itemMaximum = 1;
             let itemCount = 0;
+<<<<<<< HEAD
             enemyFrequency = 500*adjustDifficulty;
+=======
+            enemyFrequency = 500;
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
             enemyInterval = setInterval(function () {
                 enemyGenerator();
                 count += 1;
@@ -623,7 +720,11 @@ io.on('connection', (socket) => {
                         straightEnemyGenerator(1);
                     }
                 }
+<<<<<<< HEAD
                 if (Math.floor(count) >= (31/adjustDifficulty)){
+=======
+                if (Math.floor(count) >= 31){
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
                     clearInterval(enemyInterval);
                     for (var i = 0 ; i < balls.length ; i++){
                         balls[i].state = 1;
@@ -642,7 +743,11 @@ io.on('connection', (socket) => {
             let stage = 8;
             let itemMaximum = 1;
             let itemCount = 0;
+<<<<<<< HEAD
             enemyFrequency = 450*adjustDifficulty;
+=======
+            enemyFrequency = 450;
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
             enemyInterval = setInterval(function () {
                 enemyGenerator();
                 count += 1;
@@ -659,7 +764,11 @@ io.on('connection', (socket) => {
                         straightEnemyGenerator(1);
                     }
                 }
+<<<<<<< HEAD
                 if (Math.floor(count) >= (34/adjustDifficulty)){
+=======
+                if (Math.floor(count) >= 34){
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
                     clearInterval(enemyInterval);
                     for (var i = 0 ; i < balls.length ; i++){
                         balls[i].state = 1;
@@ -907,4 +1016,8 @@ io.on('connection', (socket) => {
 
 server.listen(3000, () => {
   console.log('listening on *:3000');
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> a01f337497c04d1021010c5fcdbcbaf1a46e16e2
