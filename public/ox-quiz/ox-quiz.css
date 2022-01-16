@@ -1,0 +1,221 @@
+body {
+    background-color: #fce3c2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.number {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.label {
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.problem {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0px 20px;
+}
+
+.problem_img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.answer {
+    text-align: center;
+    height: 50px;
+    margin: 20px;
+}
+.wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 60px;
+}
+.info-container {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 80%;
+    height: 100px;
+    text-align: center;
+    margin-top: 20px;
+}
+.canvas1 {
+    box-shadow: 0 0 10px 2px rgba(100, 100, 100);
+    margin: 50px 0px;
+}
+#nes-ash {
+    top: 12%;
+}
+
+#game-title {
+    font-size: 1.4rem;
+    width: 40%;
+    height: 100px;
+    display: inline-block;
+    background-image: linear-gradient(to right, #00f260, #f79d00, #0575e6, #64f38c);
+    -webkit-background-clip: text;
+    color: transparent;
+    background-size: 300%;
+    background-position: -200%;
+
+    animation: animatedText 2s infinite alternate-reverse;
+}
+
+@keyframes animatedText {
+    from {
+        background-position: 0%;
+    }
+    to {
+        background-position: 100%;
+    }
+}
+
+#board-title {
+    padding-top: 10px;
+    font-size: 0.7rem;
+    margin-bottom: 8px;
+}
+
+#score-board {
+    font-size: 0.8rem;
+    border: 8px double white;
+    height: 100px;
+    width: 300px;
+    display: inline-block;
+    margin-left: 40px;
+    text-align: left;
+}
+
+#Seoul-uni {
+    color: blue;
+}
+
+#Korea-uni {
+    color: red;
+}
+
+.button.o {
+    width: 100px;
+    color: #ffffff;
+    background: #f88379;
+    border: 2px solid #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.button.o:hover {
+    background: #e63a00;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.button.o:active {
+    background: #e63a00;
+    color: #ffffff;
+}
+
+.button.o:focus {
+    background-color: #e63a00;
+    outline: 0;
+}
+
+.button.x {
+    width: 100px;
+    color: #ffffff;
+    background: #f88379;
+    border: 2px solid #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.button.x:hover {
+    background: #e63a00;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.button.x:active {
+    background: #e63a00;
+    color: #ffffff;
+}
+
+.button.x:focus {
+    background-color: #e63a00;
+    outline: 0;
+}
+
+.button.res {
+    width: 150px;
+    color: #ffffff;
+    background: #79aff8;
+    border: 2px solid #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.button.res:hover {
+    background: #3084f4;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.button.res:active {
+    background: #3084f4;
+    color: #ffffff;
+}
+
+.button.res:focus {
+    background-color: #3084f4;
+    outline: 0;
+}
+
+.button.restart {
+    width: 150px;
+    color: #ffffff;
+    background: #f88379;
+    border: 2px solid #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.button.restart:hover {
+    background: #e63a00;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.button.restart:active {
+    background: #e63a00;
+    color: #ffffff;
+}
+
+.button.restart:focus {
+    background-color: #e63a00;
+    outline: 0;
+}
+
+.admin {
+    width: 320px;
+    margin: 0 auto;
+    margin-top: 20px;
+}

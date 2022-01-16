@@ -1,0 +1,92 @@
+canvas {
+    background: #eee;
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    /* background-color: #b8c6db;
+  background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%); */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.info-container {
+    position: relative;
+    width: 80%;
+    height: 100px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#nes-badge{
+  margin-left:-22%;
+}
+#nes-ash {
+    top: 12%;
+}
+
+#game-title {
+    font-size: 1.4rem;
+    width: 40%;
+    height: 100px;
+    display: inline-block;
+    background-image: linear-gradient(to right, #00f260, #f79d00, #0575e6, #64f38c);
+    -webkit-background-clip: text;
+    color: transparent;
+
+    background-size: 300%;
+    background-position: -200%;
+
+    animation: animatedText 2s infinite alternate-reverse;
+}
+
+@keyframes animatedText {
+    from {
+        background-position: 0%;
+    }
+    to {
+        background-position: 100%;
+    }
+}
+
+#board-title {
+    font-size: 0.7rem;
+}
+
+#score-board {
+    font-size: 0.8rem;
+    width: 20vw;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    margin-left: 40px;
+    text-align: left;
+}
+
+#Seoul-uni {
+    color: blue;
+}
+
+#Korea-uni {
+    color: red;
+}
+
+#myCanvas {
+    box-shadow: 0 0 10px 2px rgba(100, 100, 100);
+    width: 550px;
+    height: 400px;
+    margin-top: 50px;
+}
