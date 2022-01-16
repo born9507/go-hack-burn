@@ -58,7 +58,7 @@ function draw() {
             dino.y -= 8
         }
 
-        if (timer % 10 === 0) {
+        if (timer % 20 === 0) {
             var star = new Stars();
             stars.push(star)
 

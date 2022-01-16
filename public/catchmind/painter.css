@@ -20,11 +20,20 @@ body {
 }
 .info-container {
   position: relative;
-  width: 80%;
-  height: 100px;
+  width: 100%;
   text-align: center;
   margin-top: 100px;
   margin-bottom: 20px;
+}
+
+#jsCanvas {
+  border: 1px solid black;
+  width: 500px;
+  height: 450px;
+}
+
+.nes-btn {
+  padding: 0!important;
 }
 
 #nes-badge{
@@ -160,7 +169,7 @@ margin-left: -20%;
 
 .game__box{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -170,5 +179,9 @@ ul{
 }
 
 .left-time{
+  font-family: 'NeoDunggeunmo';
+}
+
+ul, button {
   font-family: 'NeoDunggeunmo';
 }
