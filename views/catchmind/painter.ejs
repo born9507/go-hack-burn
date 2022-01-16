@@ -53,6 +53,8 @@
     var socket = io();
 
     var id = "<%= id %>"
+    var name = "<%= name %>"
+
     socket.emit('catchmind/painter-enter', {'id': id})
 
     socket.on('catchmind/solution', (data) => {
@@ -82,7 +84,7 @@
 
     const sendMessage = (_) => {
       const content = document.getElementById('input-box').value
-      socket.emit('catchmind/send-message', {'content': content })
+      socket.emit('catchmind/send-message', {'name': name, 'content': content })
     }
 
     const eraseAll = () => {
@@ -103,7 +105,7 @@
       const content = data['content'];
 
       let li = document.createElement('li')
-      li.innerHTML = data['content']
+      li.innerHTML = data['name'] + ': ' + data['content']
       document.getElementById('message-list').appendChild(li)
     })
 

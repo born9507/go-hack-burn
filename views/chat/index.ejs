@@ -44,7 +44,7 @@
     console.log('start')
     var socket = io();
 
-    name = '이름' // 여기 유저가 설정한 이름으로 바꾸기
+    var name = "<%= name %>"
 
     const sendMessage = () => {
       const content = document.getElementById('input-box').value
@@ -59,7 +59,7 @@
         sendMessage()
       }
     }
-    
+
     socket.on('chat/send-message', (data) => {
       console.log('chat/send-message');
       const name = data['name'];

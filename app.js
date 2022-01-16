@@ -81,9 +81,9 @@ app.get('/catchmind', async (req, res) => {
     console.log(user.id)
 
     if (catchmindRoom.painterId == null || catchmindRoom.painterId == user.id) {
-      res.render('catchmind/painter', { 'id': user.id, 'sessionID': user.sessionID })
+      res.render('catchmind/painter', { 'id': user.id, 'name': user.name, 'sessionID': user.sessionID })
     } else {
-      res.render('catchmind/answerer', { 'id': user.id, 'sessionID': user.sessionID })
+      res.render('catchmind/answerer', { 'id': user.id, 'name': user.name, 'sessionID': user.sessionID })
     }
   } else {
     res.redirect('/')
@@ -102,7 +102,7 @@ app.get('/chat', async (req, res) => {
         where: { sessionID: req.sessionID },
     })
     if (user) {
-        res.render('chat/index');
+        res.render('chat/index', {'name': user.name});
     } else {
         res.redirect('/')
     }
