@@ -5,64 +5,81 @@ function draw() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    var first_game = {
-        x: 50,
-        y: 40,
-        width: 70,
-        height: 50,
-        draw() {
-            ctx.fillStyle = 'skyblue';
-            ctx.fillRect(this.x, this.y, this.width, this.height);
-        }
-    }
-
     var dino = {
         x: 300,
         y: 200,
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 25,
         draw() {
             ctx.fillStyle = 'green';
             ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
 
-    function move() {
-        animation = requestAnimationFrame(move);
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        dino.draw()
-        first_game.draw()
+    var Pstar = new Image();
+    Pstar.src = 'Pstar.png';
 
-        var x1 = dino.x - (first_game.x + first_game.width);
-        var x2 = (dino.x + dino.width) - first_game.x;
-        var y1 = dino.y - (first_game.y + first_game.height);
-        var y2 = (dino.y + dino.height) - first_game.y;
-        if (rightPressed) {
-            dino.x += 2
+    class Stars {
+        constructor() {
+            this.x = Math.floor(Math.random() * 1500);
+            this.y = Math.floor(Math.random() * 650);
+            this.width = 30;
+            this.height = 30;
         }
-        if (leftPressed) {
-            dino.x -= 2
+        draw() {
+            ctx.fillStyle = '#FFE200'
+            // ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.drawImage(Pstar, this.x, this.y)
         }
-        if (downPressed) {
-            dino.y += 2
-        }
-        if (upPressed) {
-            dino.y -= 2
-        }
-
-        if ((x1 <= 0) && (y1 < 0) && (x2 > 0) && (y2 > 0)) {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            pageChange = true
-        }
-
-
     }
-    move()
-
     var rightPressed = false;
     var leftPressed = false;
     var downPressed = false;
     var upPressed = false;
+    var timer = 0;
+    var stars = [];
+    var score = 1;
+    function move() {
+        animation = requestAnimationFrame(move);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        dino.draw()
+        ++timer;
+
+        if (rightPressed) {
+            dino.x += 8
+        }
+        if (leftPressed) {
+            dino.x -= 8
+        }
+        if (downPressed) {
+            dino.y += 8
+        }
+        if (upPressed) {
+            dino.y -= 8
+        }
+
+        if (timer % 50 === 0) {
+            var star = new Stars();
+            stars.push(star)
+
+        }
+
+
+
+        stars.forEach((s, i, o) => {
+            var x1 = dino.x - (s.x + s.width);
+            var x2 = (dino.x + dino.width) - s.x;
+            var y1 = dino.y - (s.y + s.height);
+            var y2 = (dino.y + dino.height) - s.y;
+            if ((x1 <= 0) && (y1 < 0) && (x2 > 0) && (y2 > 0)) {
+                o.splice(i, 1)
+                var newScore = score++;
+                document.getElementById("score").innerText = newScore
+            }
+            s.draw();
+        })
+    }
+    move()
 
     document.addEventListener('keydown', function (e) {
         if (e.code == 'ArrowRight') {
