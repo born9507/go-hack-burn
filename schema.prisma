@@ -11,6 +11,7 @@ model User {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   sessionID String   @unique
+  socketID  String?
   name      String?
   univ      String?
 }
@@ -19,4 +20,6 @@ model CatchmindRoom {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   painterId Int?
+  answererList String?
+  solution  String?
 }
